@@ -1,0 +1,42 @@
+﻿@model WebApplication1.Models.GuestResponse
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RavpForm</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/Styles.css" rel="stylesheet" />
+</head>
+<body>
+    Rsvp Page
+    <form method="post" asp-action="RsvpForm">
+        @Html.ValidationSummary()
+        <p>
+            <label asp-for="Name">Your name:</label>
+            <input asp-for="Name" />
+        </p>
+        <p>
+            <label asp-for="Email">Your email:</label>
+            <input asp-for="Email" />
+        </p>
+        <p>
+            <label asp-for="Phone">Your phone:</label>
+            <input asp-for="Phone" />
+        </p>
+        <p>
+            <label asp-for="WillAttend">Will you attend?</label>
+            <select asp-for="WillAttend">
+                <option value="">Choose a option</option>
+                <option value="true">I'll attend</option>
+                <option value="false">I won't attend</option>
+            </select>
+        </p>
+        <button type="submit">Submit Your RSVP</button>
+    </form>
+</body>
+</html>

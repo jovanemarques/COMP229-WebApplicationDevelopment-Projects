@@ -1,0 +1,30 @@
+﻿@model WebApplication1.Models.GuestResponse
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Thanks</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <p>
+        <h1>Thank you, @Model.Name</h1>
+        @if (Model.WillAttend == true)
+        {
+            @:it is good that you are coming!
+        }
+        else
+        {
+            @:We are sorry that you are not coming
+        }
+    </p>
+    <p>
+        Click <a class="navbar-link" asp-action="ListResponses">here</a> to see the list of who is coming.
+    </p>
+</body>
+</html>
