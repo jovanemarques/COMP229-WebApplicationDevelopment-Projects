@@ -1,0 +1,61 @@
+﻿@*using _ViewImports.cshtml to import the model*@
+@*@model Product*@
+@model Product[]
+@{
+    //using from file _ViewStart.cshtml
+    //Layout = "_Layout";
+
+    // can be overwritten
+    //Layout = null;
+
+    ViewBag.Title = "Product name";
+}
+@*<div data-productid="@Model.ProductID" data-stocklevel="@ViewBag.StockLevel">*@
+@*<p>Product name: @Model.Name</p>
+    <p>Product price: @($"{Model.Price:c2}")</p>*@
+@*<p>Stock level: @ViewBag.StockLevel</p>*@
+@*<p>
+    Stock level:*@
+@*@switch (ViewBag.StockLevel)
+    {
+        case 0:
+            @:Out of stock
+            break;
+        case 1:
+        case 2:
+        case 3:
+            <b>Low Stock (@ViewBag.StockLevel)</b>
+            break;
+        default:
+            @: @ViewBag.StockLevel in stock
+            break;
+    }*@
+@*@if (ViewBag.StockLevel == 0)
+        {
+            @:Out of stock
+        }
+        else if (ViewBag.StockLevel <= 3)
+        {
+            <b>Low Stock (@ViewBag.StockLevel)</b>
+        }
+        else
+        {
+            @: @ViewBag.StockLevel in stock
+        }
+    </p>*@
+
+@*</div>*@
+<table>
+    <thead>
+        <tr><th>Name</th><th>Price</th></tr>
+    </thead>
+    <tbody>
+        @foreach (Product p in Model)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>@($"{p.Price:c2}")</td>
+            </tr>
+        }
+    </tbody>
+</table>
