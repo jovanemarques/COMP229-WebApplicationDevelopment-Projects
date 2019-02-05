@@ -11,6 +11,7 @@ namespace WorkingWithVisualStudio.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Test = "Test";
             return View(SimpleRepository.SharedRepository.Produtcs);
         }
     }

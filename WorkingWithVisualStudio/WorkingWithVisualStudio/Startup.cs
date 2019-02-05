@@ -21,6 +21,8 @@ namespace WorkingWithVisualStudio
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseDeveloperExceptionPage(); // to see the errors details
+            app.UseStaticFiles();// without this static content does not work.
             app.UseMvcWithDefaultRoute();
             //if (env.IsDevelopment())
             //{
