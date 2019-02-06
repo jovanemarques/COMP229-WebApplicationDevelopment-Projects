@@ -1,0 +1,22 @@
+﻿.table tr td{
+    border:1px solid black;
+}
+#divTop{
+    border:1px solid red;
+}
+#divBody {
+    border: 1px solid green;
+}
+#divBottom {
+    border: 1px solid blue;
+}
+#imgTopLogo {
+    border: 1px solid red;
+    width: 100px;
+    height: 100px;
+}
+#tdTitle{
+    font-size:40pt;
+    font-family:Calibri;
+    color:red;
+}
