@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "List";
+}
+
+@foreach (Product product in Model)
+{
+<div>
+    <h3>@product.Name</h3>
+    <h4>@product.Price.ToString("c")</h4>
+</div>
+
+}
