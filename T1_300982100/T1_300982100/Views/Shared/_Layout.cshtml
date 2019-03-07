@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/StyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+    <table>
+        <tr>
+            <td><h1>Car Repair System</h1></td>
+            <td><img id="imgLogo" src="~/img/logo.jpg" /></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                @RenderBody()
+            </td>
+        </tr>
+        <tr>
+            <td id="tdCopyright">
+                Copyright 2019. Jovane Marques - 300982100
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

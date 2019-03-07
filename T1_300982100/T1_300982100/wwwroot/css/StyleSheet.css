@@ -1,0 +1,13 @@
+﻿body{
+    font-family:Calibri;
+    font-size:14px;
+}
+
+#imgLogo{
+    width:200px;
+    height:100px;
+}
+
+#tdCopyright{
+    font-weight:bold;
+}

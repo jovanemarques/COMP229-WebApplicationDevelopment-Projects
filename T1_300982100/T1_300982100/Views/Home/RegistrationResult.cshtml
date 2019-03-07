@@ -1,0 +1,46 @@
+﻿@model Car
+@{
+    ViewData["Title"] = "RegistrationResult";
+}
+
+<h2>RegistrationResult</h2>
+
+<table>
+    <tr>
+        <td>License Plate:</td>
+        <td>@Model.LicensePlate</td>
+    </tr>
+    <tr>
+        <td>Owner Name:</td>
+        <td>@Model.OwnerName</td>
+    </tr>
+    <tr>
+        <td>Owner Address:</td>
+        <td>@Model.OwnerAddress</td>
+    </tr>
+    <tr>
+        <td>Make:</td>
+        <td>@Model.Make</td>
+    </tr>
+    <tr>
+        <td>Model:</td>
+        <td>@Model.Model</td>
+    </tr>
+    <tr>
+        <td>Additional features:</td>
+        <td>
+            @if (Model.FourDoor)
+            {
+                @:"4 Door, "
+            }
+            @if (Model.Hybrid)
+            {
+                @:"Hybrid, "
+            }
+            @if (Model.FourWD)
+            {
+                @:"4WD"
+            }
+        </td>
+    </tr>
+</table>

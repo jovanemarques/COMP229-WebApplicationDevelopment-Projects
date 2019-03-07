@@ -1,0 +1,52 @@
+﻿@model Car
+@{
+    ViewData["Title"] = "Registration";
+}
+<form method="post" asp-action="RegistrationResult">
+    <table>
+        <tr>
+            <td><label asp-for="LicensePlate">License Plate:</label></td>
+            <td><input asp-for="LicensePlate" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="OwnerName">Owner Name:</label></td>
+            <td><input asp-for="OwnerName" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="OwnerAddress">Owner Address:</label></td>
+            <td><input asp-for="OwnerAddress" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Make">Make:</label></td>
+            <td>
+                @*Change this to dinamic if the time allow*@
+                <select asp-for="Make">
+                    <option></option>
+                    <option>Honda</option>
+                    <option>Toyota</option>
+                    <option>Volvo</option>
+                    <option>Lexus</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label asp-for="Model">Model:</label></td>
+            <td><input asp-for="Model" /></td>
+        </tr>
+        <tr>
+            <td>Additional features:</td>
+            <td>
+                <table>
+                    <tr>
+                        <td><input type="checkbox" asp-for="FourDoor" />4 door</td>
+                        <td><input type="checkbox" asp-for="Hybrid" />Hybrid</td>
+                        <td><input type="checkbox" asp-for="FourWD" />4WD</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td><button type="submit">Register</button><button type="button" asp-action="Index">Cancel</button></td>
+        </tr>
+    </table>
+</form>
