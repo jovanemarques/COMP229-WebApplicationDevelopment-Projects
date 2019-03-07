@@ -1,32 +1,42 @@
-﻿
+﻿@model IEnumerable<Club>
 @{
-    ViewData["Title"] = "Club";
+    ViewData["Title"] = "Clubs";
 }
 
-<h2>Club</h2>
+<h2>Clubs</h2>
 
-<table>
-    <thead>
-        <tr><td>Club Name</td><td>Founded</td><td>Crest</td><td>City</td><td>Country</td></tr>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Club Name</th>
+            <th scope="col">Foundation</th>
+            <th scope="col">Crest</th>
+            <th scope="col">City</th>
+            <th scope="col">Country</th>
+        </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Flamengo</td>
-            <td>1895-11-19</td>
-            <td>
-                <img class="crest" src="~/images/flamengo_logo.png" />
-            </td>
-            <td>Rio de Janeiro</td>
-            <td>Brazil</td>
-        </tr>
-        <tr>
-            <td>Real Madrid</td>
-            <td>1902-03-06</td>
-            <td>
-                <img class="crest" src="~/images/real_madrid.jpg" />
-            </td>
-            <td>Madrid</td>
-            <td>Spain</td>
-        </tr>
+        @foreach (var club in Model)
+        {
+            <tr>
+                <td>
+                    <form method="post" asp-action="ShowClubDetails">
+                        <input type="hidden" name="clubId" value="@club.Id"/>
+                        <button type="submit" class="btn btn-link">
+                            @club.Name
+                        </button>
+                    </form>
+                </td>
+                <td>@club.Foundation.ToShortDateString()</td>
+                <td>
+                    @if (club.CresteLinkAddress != null)
+                    {
+                        <img class="crest" src="@club.CresteLinkAddress" />
+                    }
+                </td>
+                <td>@club.City</td>
+                <td>@club.Country</td>
+            </tr>
+        }
     </tbody>
 </table>

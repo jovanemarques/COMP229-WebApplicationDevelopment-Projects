@@ -1,34 +1,18 @@
-﻿
+﻿@model Club
 @{
-    ViewData["Title"] = "AddClub";
+    ViewData["Title"] = "Add Club";
 }
 
-<h2>AddClub</h2>
+<h2>Add Club</h2>
 
-<form>
+<form asp-action="AddNewClub" method="post">
 
-    <table>
-        <tr>
-            <td>Club name</td>
-            <td><input type="text" /></td>
-        </tr>
-        <tr>
-            <td>Date of Creation:</td>
-            <td><input type="text" /></td>
-        </tr>
-        <tr>
-            <td>Crest:</td>
-            <td><input type="text" /></td>
-        </tr>
-        <tr>
-            <td>City:</td>
-            <td><input type="text" /></td>
-        </tr>
-        <tr>
-            <td>Country:</td>
-            <td><input type="text" /></td>
-        </tr>
-    </table>
-    <input type="button" value="Add" class="button_green"/>
-
+    @* Using the async version as recommended by the DotNet Team to avoid deadlocks
+        References:
+        - https://github.com/aspnet/Mvc/issues/7083
+        - https://github.com/aspnet/Docs/issues/5636)
+    *@
+    @await Html.PartialAsync("ClubForm")
+    <button id="btnSave" type="submit" class="btn btn-dark">Save</button>
+    <a href="Index" class="btn btn-outline-dark">Cancel</a>
 </form>

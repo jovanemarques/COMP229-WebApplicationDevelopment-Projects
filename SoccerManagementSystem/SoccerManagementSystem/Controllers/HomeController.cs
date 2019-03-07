@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using SoccerManagementSystem.Models;
 
 namespace SoccerManagementSystem.Controllers
 {
@@ -10,19 +7,30 @@ namespace SoccerManagementSystem.Controllers
     {
         public ViewResult Index()
         {
-            return View();                                                                                                                                                                                                                                          
+            return View();
+        }
+        public ViewResult Menu()
+        {
+            return View();
         }
         public ViewResult Club()
         {
-            return View();
+            return View(FakeRepository.GetFakeRepository().Clubs);
         }
         public ViewResult AddClub()
         {
             return View();
         }
-        public ViewResult ShowClubDetails()
+        [HttpPost]
+        public RedirectToActionResult AddNewClub(Club club)
         {
-            return View();
+            FakeRepository.GetFakeRepository().Add(club);
+            return RedirectToAction("Club");
+        }
+        public ViewResult ShowClubDetails(int clubId)
+        {
+            Club club = FakeRepository.GetFakeRepository().GetClub(clubId);
+            return View(club);
         }
         public ViewResult ManagePlayers()
         {
