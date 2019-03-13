@@ -16,6 +16,6 @@ namespace SportStore.Models
         }
 
         public DbSet<Product> Products { get; set; } // collection of products - it will go to the DB
-
+        public DbSet<Order> Orders { get; set; }
     }
 }
