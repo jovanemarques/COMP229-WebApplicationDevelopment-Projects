@@ -1,2 +1,5 @@
 // on the project fold
 dotnet ef migrations add Initial
+
+command below to fix problems when a .js file it is not found in the build
+dotnet recovery
