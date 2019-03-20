@@ -13,6 +13,7 @@
             <th scope="col">Crest</th>
             <th scope="col">City</th>
             <th scope="col">Country</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -21,7 +22,7 @@
             <tr>
                 <td>
                     <form method="post" asp-action="ShowClubDetails">
-                        <input type="hidden" name="clubId" value="@club.Id"/>
+                        <input type="hidden" name="clubId" value="@club.ClubID" />
                         <button type="submit" class="btn btn-link">
                             @club.Name
                         </button>
@@ -36,6 +37,20 @@
                 </td>
                 <td>@club.City</td>
                 <td>@club.Country</td>
+                <td>
+                    <form method="post" asp-action="UpdateClub">
+                        <input type="hidden" name="clubId" value="@club.ClubID" />
+                        <button type="submit" class="btn btn-link far fa-edit">
+                            @*<i class="far fa-edit" />*@ Edit
+                        </button>
+                    </form>
+                    <form method="post" asp-action="DeleteClub">
+                        <input type="hidden" name="clubId" value="@club.ClubID" />
+                        <button type="submit" class="btn btn-link far fa-trash-alt">
+                            @*<i class="far fa-trash-alt" />*@ Delete
+                        </button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>

@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace SoccerManagementSystem.Models
 {
     public interface IRepository
     {
-        void Add(Club club);
-        List<Club> Clubs { get; }
-
-        Club GetClub(int clubId);
+        IQueryable<Club> Clubs { get; }
+        Club Get(int clubID);
+        Club Save(Club club);
+        Club Delete(int clubID);
     }
 }

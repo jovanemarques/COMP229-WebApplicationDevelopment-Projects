@@ -7,7 +7,7 @@
 <table>
     <tr><td style="font-weight:bold;">Clube name:</td><td>@Model.Name</td></tr>
     <tr><td style="font-weight:bold;">Founded:</td><td>@Model.Foundation.ToShortDateString()</td></tr>
-    <tr><td style="font-weight:bold;">Chest:</td><td><img src="@Model.CresteLinkAddress" style="width: 70px;"/></td></tr>
+    <tr><td style="font-weight:bold;">Chest:</td><td><img src="@Model.CresteLinkAddress" style="width: 70px;" /></td></tr>
     <tr><td style="font-weight:bold;">City:</td><td>@Model.City</td></tr>
     <tr><td style="font-weight:bold;">Country:</td><td>@Model.Country</td></tr>
 </table>
@@ -16,10 +16,24 @@
 
 <table class="table table-striped">
     <thead class="thead-dark">
-        <tr><th>Player name</th></tr>
+        <tr>
+            <th>
+                Player name
+            </th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
-        <tr><td>Arthur Vinícius</td></tr>
+        <tr>
+            <td>
+                Arthur Vinícius
+            </td>
+            <td>
+                <button type="submit" class="btn btn-link far fa-trash-alt">
+                    Delete
+                </button>
+            </td>
+        </tr>
         <tr><td>Athila Paixão</td></tr>
         <tr><td>Bernardo Pisetta</td></tr>
         <tr><td>Christian Esmério</td></tr>

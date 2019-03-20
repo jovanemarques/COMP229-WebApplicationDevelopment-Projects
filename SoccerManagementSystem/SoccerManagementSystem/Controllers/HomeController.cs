@@ -5,6 +5,11 @@ namespace SoccerManagementSystem.Controllers
 {
     public class HomeController : Controller
     {
+        private IRepository repository;
+        public HomeController(IRepository repository)
+        {
+            this.repository = repository;
+        }
         public ViewResult Index()
         {
             return View();
@@ -15,26 +20,42 @@ namespace SoccerManagementSystem.Controllers
         }
         public ViewResult Club()
         {
-            return View(FakeRepository.GetFakeRepository().Clubs);
+            return View(repository.Clubs);
         }
-        public ViewResult AddClub()
+        //public ViewResult AddClub()
+        //{
+        //    return View();
+        //}
+        public ViewResult AddClub(Club club)
         {
-            return View();
+            //TODO: date component is not loading corretly on update and on add
+            return View(club);
         }
         [HttpPost]
-        public RedirectToActionResult AddNewClub(Club club)
+        public RedirectToActionResult SaveClub(Club club)
         {
-            FakeRepository.GetFakeRepository().Add(club);
-            return RedirectToAction("Club");
+            Club clubReturn = repository.Save(club);
+            return RedirectToAction("Club", clubReturn);
         }
-        public ViewResult ShowClubDetails(int clubId)
+        public ViewResult ShowClubDetails(int clubID)
         {
-            Club club = FakeRepository.GetFakeRepository().GetClub(clubId);
+            Club club = repository.Get(clubID);
             return View(club);
         }
         public ViewResult ManagePlayers()
         {
             return View();
+        }
+        public RedirectToActionResult DeleteClub(int clubID)
+        {
+            Club club = repository.Delete(clubID);
+            return RedirectToAction("Club", club);
+        }
+        public RedirectToActionResult UpdateClub(int clubID)
+        {
+            Club club = repository.Get(clubID);
+            //club = repository.Save(club);
+            return RedirectToAction("AddClub", club);
         }
     }
 }
