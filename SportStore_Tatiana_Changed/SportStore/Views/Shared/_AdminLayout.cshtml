@@ -3,9 +3,14 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+
     <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" />
-    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" asp-href-include="/lib/fontawesome/css/*.css" />
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <title>SportsStore</title>
     <style>
         .input-validation-error {
             border-color: red;
@@ -14,11 +19,19 @@
     </style>
 </head>
 <body class="m-1 p-1">
-    <div class="bg-info p-2"><h4>@ViewBag.Title</h4></div>
+    <div class="bg-info p-2 row">
+        <div class="col">
+            <h4>@ViewBag.Title</h4>
+        </div>
+        <div class="col-2">
+            <a class="btn btn-sm btn-primary"
+               asp-action="Logout" asp-controller="Account">Log Out</a>
+        </div>
+    </div>
     @if (TempData["message"] != null)
     {
-        <div class="alert alert-success">@TempData["message"]</div>
+        <div class="alert alert-success mt-1">@TempData["message"]</div>
     }
-            @RenderBody()
+    @RenderBody()
 </body>
 </html>

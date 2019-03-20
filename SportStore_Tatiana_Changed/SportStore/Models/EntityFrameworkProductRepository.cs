@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace SportStore.Models
 {
@@ -15,12 +12,24 @@ namespace SportStore.Models
         }
         public IQueryable<Product> Products => context.Products;
 
+        public Product DeleteProduct(int productId)
+        {
+            Product product = context.Products.FirstOrDefault(p => p.ProductID == productId);
+            if (product != null)
+            {
+                context.Products.Remove(product);
+                context.SaveChanges();
+            }
+            return product;
+        }
+
         public void SaveProduct(Product product)
         {
-            if(product.ProductID == 0)
+            if (product.ProductID == 0)
             {
                 context.Products.Add(product);
-            } else
+            }
+            else
             {
                 Product productDb = context.Products.FirstOrDefault(p => p.ProductID == product.ProductID);
                 productDb.Name = product.Name;

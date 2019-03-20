@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SportStore.Models;
 using System.Linq;
 
 namespace SportStore.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private IProductRepository repository;
@@ -16,8 +18,8 @@ namespace SportStore.Controllers
             return View(repository.Products);
         }
         public ViewResult Edit(int productId) =>
-View(repository.Products
-.FirstOrDefault(p => p.ProductID == productId));
+            View(repository.Products.FirstOrDefault(p => p.ProductID == productId));
+
         [HttpPost]
         public IActionResult Edit(Product product)
         {
@@ -31,6 +33,17 @@ View(repository.Products
             {
                 return View(product);
             }
+        }
+        public ViewResult Create() =>
+            View("Edit", new Product());
+        public IActionResult Delete(int productId)
+        {
+            Product product = repository.DeleteProduct(productId);
+            if (product != null)
+            {
+                TempData["message"] = $"{product.Name} has been deleted";
+            }
+            return RedirectToAction("Index");
         }
     }
 }
