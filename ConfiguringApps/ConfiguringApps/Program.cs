@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using System.IO;
 
 namespace ConfiguringApps
@@ -18,8 +17,20 @@ namespace ConfiguringApps
             return new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    var env = hostingContext.HostingEnvironment;
+                    config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+                    config.AddEnvironmentVariables();
+                    if (args != null)
+                    {
+                        config.AddCommandLine(args);
+                    }
+                })
                 .UseIISIntegration()
-                .UseDefaultServiceProvider((context, options) => {
+                .UseDefaultServiceProvider((context, options) =>
+                {
                     options.ValidateScopes =
                         context.HostingEnvironment.IsDevelopment();
                 })
