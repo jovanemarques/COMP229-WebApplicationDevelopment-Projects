@@ -1,81 +1,83 @@
-﻿
+﻿@model ManagePlayersViewModel
 @{
     ViewData["Title"] = "Manage Players";
 }
 
 <h2>ManagePlayers</h2>
 
-<h3>Clube name: Flamengo</h3>
-
-<h4>Players:</h4>
-
-<table>
-    <thead>
-        <tr><td>Add player:</td></tr>
-    </thead>
-    <tbody>
-        <tr><td><input type="text" /><input type="button" value="Add" class="button_green" /></td></tr>
-    </tbody>
-</table>
+<h3>Club name: @Model.Club.Name</h3>
 
 <br />
 
-<table>
-    <thead>
-        <tr><td>Player name</td><td>Actions</td></tr>
+<h4>Current Players:</h4>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Player Name
+            </th>
+            <th>
+                Player Position
+            </th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
+        @foreach (Player player in Model.Club.Players)
+        {
+            <tr>
+                <td>
+                    @player.Name
+                </td>
+                <td>
+                    @player.Position
+                </td>
+                <td>
+                    <form asp-action="RemovePlayer" method="post">
+                        <input type="hidden" name="clubID" value="@Model.Club.ClubID" />
+                        <input type="hidden" name="playerID" value="@player.PlayerID" />
+                        <button type="submit" class="btn btn-link far fa-trash-alt">
+                            Remove
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h4>Available Players:</h4>
+<table class="table table-striped">
+    <thead class="thead-dark">
         <tr>
-            <td>Arthur Vinícius</td>
-            <td><a href="#">Remove</a>&nbsp;<select><option></option><option>Real Madrid</option></select></td>
+            <th>
+                Player Name
+            </th>
+            <th>
+                Player Position
+            </th>
+            <th></th>
         </tr>
-        <tr>
-            <td>Athila Paixão</td>
-            <td><a href="#">Remove</a>&nbsp;<select><option></option><option>Real Madrid</option></select></td>
-        </tr>
-        <tr>
-            <td>Bernardo Pisetta</td>
-            <td><a href="#">Remove</a>&nbsp;<select><option></option><option>Real Madrid</option></select></td>
-        </tr>
-        <tr>
-            <td>Christian Esmério</td>
-            <td><a href="#">Remove</a>&nbsp;<select><option></option><option>Real Madrid</option></select></td>
-        </tr>
-        <tr>
-            <td>Gedson Santos</td>
-            <td><a href="#">Remove</a>&nbsp;<select><option></option><option>Real Madrid</option></select></td>
-        </tr>
-        <tr>
-            <td>Jorge Eduardo</td>
-            <td><a href="#">Remove</a>&nbsp;<select><option></option><option>Real Madrid</option></select></td>
-        </tr>
-        <tr>
-            <td>Pablo Henrique</td>
-            <td><a href="#">Remove</a>&nbsp;<select><option></option><option>Real Madrid</option></select></td>
-        </tr>
-        <tr>
-            <td>Rykelmo de Souza Viana</td>
-            <td><a href="#">Remove</a>&nbsp;<select><option></option><option>Real Madrid</option></select></td>
-        </tr>
-        <tr>
-            <td>Samuel Thomas Rosa</td>
-            <td><a href="#">Remove</a>&nbsp;<select><option></option><option>Real Madrid</option></select></td>
-        </tr>
-        <tr>
-            <td>Vitor Isaías</td>
-            <td><a href="#">Remove</a>&nbsp;<select><option></option><option>Real Madrid</option></select></td>
-        </tr>
-        <tr>
-            <td>Jhonatan Cruz Ventura</td>
-            <td><a href="#">Remove</a>&nbsp;<select><option></option><option>Real Madrid</option></select></td>
-        </tr>
-        <tr>
-            <td>Francisco Diogo Bento Alves</td>
-            <td><a href="#">Remove</a>&nbsp;<select><option></option><option>Real Madrid</option></select></td>
-        </tr>
-        <tr>
-            <td>Cauan Emanuel Gomes Nunes</td>
-            <td><a href="#">Remove</a>&nbsp;<select><option></option><option>Real Madrid</option></select></td>
-        </tr>
+    </thead>
+    <tbody>
+        @foreach (Player player in Model.AvailablePlayers)
+        {
+            <tr>
+                <td>
+                    @player.Name
+                </td>
+                <td>
+                    @player.Position
+                </td>
+                <td>
+                    <form asp-action="AddPlayer" method="post">
+                        <input type="hidden" name="clubID" value="@Model.Club.ClubID" />
+                        <input type="hidden" name="playerID" value="@player.PlayerID" />
+                        <button type="submit" class="btn btn-link fas fa-user-plus">
+                            Add
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

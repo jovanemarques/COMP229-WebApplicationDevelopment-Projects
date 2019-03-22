@@ -12,6 +12,7 @@
         - https://github.com/aspnet/Mvc/issues/7083
         - https://github.com/aspnet/Docs/issues/5636)
     *@
+    <input type="hidden" asp-for="ClubID" />
     @await Html.PartialAsync("ClubForm")
     <button id="btnSave" type="submit" class="btn btn-dark">Save</button>
     <a href="Index" class="btn btn-outline-dark">Cancel</a>

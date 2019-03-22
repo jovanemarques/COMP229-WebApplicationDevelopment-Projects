@@ -14,16 +14,7 @@ namespace SoccerManagementSystem.Models
         {
             AppDBContext context = app.ApplicationServices.GetRequiredService<AppDBContext>();
             context.Database.Migrate();
-            if (!context.Players.Any())
-            {
-                context.Players.AddRange(
-                     new Player
-                     {
-                         Name = "Player A",
-                         Position = "Attacker"
-                     }
-                );
-            };
+
             if (!context.Clubs.Any())
             {
                 context.Clubs.AddRange(
@@ -34,8 +25,21 @@ namespace SoccerManagementSystem.Models
                          CresteLinkAddress = "/images/flamengo_logo.png",
                          City = "Rio de Janeiro",
                          Country = "Brazil",
-                         //TODO: load players
-                         //players = context.Players.ToList()
+                         Players = new List<Player>()
+                         {
+                            new Player
+                            {
+                                Name = "Player A",
+                                Position = "Defender",
+                                hasTeam = true
+                            },
+                            new Player
+                            {
+                                Name = "Player B",
+                                Position = "Goalkeeper",
+                                hasTeam = true
+                            }
+                         }
                      },
                     new Club
                     {
@@ -43,9 +47,32 @@ namespace SoccerManagementSystem.Models
                         Foundation = new DateTime(1902, 03, 06),
                         CresteLinkAddress = "/images/real_madrid.jpg",
                         City = "Madrid",
-                        Country = "Spain"
+                        Country = "Spain",
+                        Players = new List<Player>()
+                         {
+                            new Player
+                            {
+                                Name = "Player C",
+                                Position = "Midfielder",
+                                hasTeam = true
+                            },
+                            new Player
+                            {
+                                Name = "Player D",
+                                Position = "Forward",
+                                hasTeam = true
+                            },
+                            new Player
+                            {
+                                Name = "Player E",
+                                Position = "Winger",
+                                hasTeam = true
+                            }
+                         }
                     }
                 );
+                //context.Clubs.FirstOrDefault(c => c.ClubID == 1).Players.AddRange(context.Players.Where(p => p.PlayerID == 1 || p.PlayerID == 2));
+                //context.Clubs.FirstOrDefault(c => c.ClubID == 2).Players.AddRange(context.Players.Where(p => p.PlayerID == 3 || p.PlayerID == 4));
             }
             context.SaveChanges();
         }

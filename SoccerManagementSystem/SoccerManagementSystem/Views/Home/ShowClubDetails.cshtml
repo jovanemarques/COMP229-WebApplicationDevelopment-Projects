@@ -18,33 +18,51 @@
     <thead class="thead-dark">
         <tr>
             <th>
-                Player name
+                Player Name
             </th>
-            <th></th>
+            <th>
+                Player Position
+            </th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                Arthur Vinícius
-            </td>
-            <td>
-                <button type="submit" class="btn btn-link far fa-trash-alt">
-                    Delete
-                </button>
-            </td>
-        </tr>
-        <tr><td>Athila Paixão</td></tr>
-        <tr><td>Bernardo Pisetta</td></tr>
-        <tr><td>Christian Esmério</td></tr>
-        <tr><td>Gedson Santos</td></tr>
-        <tr><td>Jorge Eduardo</td></tr>
-        <tr><td>Pablo Henrique</td></tr>
-        <tr><td>Rykelmo de Souza Viana</td></tr>
-        <tr><td>Samuel Thomas Rosa</td></tr>
-        <tr><td>Vitor Isaías</td></tr>
-        <tr><td>Jhonatan Cruz Ventura</td></tr>
-        <tr><td>Francisco Diogo Bento Alves</td></tr>
-        <tr><td>Cauan Emanuel Gomes Nunes</td></tr>
+        @foreach (Player player in Model.Players)
+        {
+            <tr>
+                <td>
+                    @player.Name
+                </td>
+                <td>
+                    @player.Position
+                </td>
+            </tr>
+        }
+
+        @*<tr>
+                <td>
+                    Arthur Vinícius
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-link far fa-trash-alt">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            <tr><td>Athila Paixão</td></tr>
+            <tr><td>Bernardo Pisetta</td></tr>
+            <tr><td>Christian Esmério</td></tr>
+            <tr><td>Gedson Santos</td></tr>
+            <tr><td>Jorge Eduardo</td></tr>
+            <tr><td>Pablo Henrique</td></tr>
+            <tr><td>Rykelmo de Souza Viana</td></tr>
+            <tr><td>Samuel Thomas Rosa</td></tr>
+            <tr><td>Vitor Isaías</td></tr>
+            <tr><td>Jhonatan Cruz Ventura</td></tr>
+            <tr><td>Francisco Diogo Bento Alves</td></tr>
+            <tr><td>Cauan Emanuel Gomes Nunes</td></tr>*@
     </tbody>
 </table>
+<form asp-action="ManagePlayers" method="post">
+    <input type="hidden" name="clubID" value="@Model.ClubID" />
+    <button id="btnManagePlayers" type="submit" class="btn btn-dark">Manage Players</button>
+</form>

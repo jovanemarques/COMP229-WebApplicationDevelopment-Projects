@@ -11,5 +11,6 @@ namespace SoccerManagementSystem.Models
         public int PlayerID { get; set; }
         public string Name { get; set; }
         public string Position { get; set; }
+        public bool hasTeam { get; set; }
     }
 }

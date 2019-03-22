@@ -74,5 +74,20 @@ namespace SoccerManagementSystem.Models
         {
             throw new NotImplementedException();
         }
+
+        public Player RemovePlayerFromClub(int playerID, int clubID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<Player> GetAvailablePlayers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Player AddPlayerToClub(int playerID, int clubID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

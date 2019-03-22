@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SoccerManagementSystem.Models;
+using SoccerManagementSystem.Models.ViewModels;
 
 namespace SoccerManagementSystem.Controllers
 {
@@ -28,8 +29,19 @@ namespace SoccerManagementSystem.Controllers
         //}
         public ViewResult AddClub(Club club)
         {
-            //TODO: date component is not loading corretly on update and on add
             return View(club);
+        }
+        [HttpPost]
+        public RedirectToActionResult RemovePlayer(int playerID, int clubID)
+        {
+            repository.RemovePlayerFromClub(playerID, clubID);
+            return RedirectToAction("Club");//TODO: maybe point to a better destination
+        }
+        [HttpPost]
+        public RedirectToActionResult AddPlayer(int playerID, int clubID)
+        {
+            repository.AddPlayerToClub(playerID, clubID);
+            return RedirectToAction("Club");//TODO: maybe point to a better destination
         }
         [HttpPost]
         public RedirectToActionResult SaveClub(Club club)
@@ -42,9 +54,14 @@ namespace SoccerManagementSystem.Controllers
             Club club = repository.Get(clubID);
             return View(club);
         }
-        public ViewResult ManagePlayers()
+        public ViewResult ManagePlayers(int clubID)
         {
-            return View();
+            ManagePlayersViewModel manage = new ManagePlayersViewModel();
+            manage.Club = repository.Get(clubID);
+            manage.AvailablePlayers = repository.GetAvailablePlayers();
+
+            return View(manage);
+            //return View();
         }
         public RedirectToActionResult DeleteClub(int clubID)
         {

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace SoccerManagementSystem.Models
 {
@@ -9,7 +10,8 @@ namespace SoccerManagementSystem.Models
         {
             this.dbContext = dbContext;
         }
-        public IQueryable<Club> Clubs => dbContext.Clubs;
+        public IQueryable<Club> Clubs => dbContext.Clubs.Include(c => c.Players);
+        public IQueryable<Player> Players => dbContext.Players;
 
         public Club Save(Club club)
         {
@@ -41,9 +43,31 @@ namespace SoccerManagementSystem.Models
             return club;
         }
 
-        public Club Get(int clubID)
+        public Club Get(int clubID) =>
+            Clubs.FirstOrDefault(c => c.ClubID == clubID);
+
+        public IQueryable<Player> GetAvailablePlayers()
         {
-            return dbContext.Clubs.FirstOrDefault(c => c.ClubID == clubID);
+            return Players.Where(p => !p.hasTeam);
+        }
+
+        public Player RemovePlayerFromClub(int playerID, int clubID)
+        {
+            Player player = Players.FirstOrDefault(p => p.PlayerID == playerID);
+            Club club = Clubs.FirstOrDefault(c => c.ClubID == clubID);
+            club.Players.Remove(player);
+            player.hasTeam = false;
+            dbContext.SaveChanges();
+            return player;
+        }
+        public Player AddPlayerToClub(int playerID, int clubID)
+        {
+            Player player = Players.FirstOrDefault(p => p.PlayerID == playerID);
+            Club club = Clubs.FirstOrDefault(c => c.ClubID == clubID);
+            club.Players.Add(player);
+            player.hasTeam = true;
+            dbContext.SaveChanges();
+            return player;
         }
     }
 }
