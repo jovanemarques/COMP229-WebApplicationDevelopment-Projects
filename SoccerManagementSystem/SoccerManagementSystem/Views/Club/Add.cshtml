@@ -1,9 +1,17 @@
 ﻿@model Club
 @{
-    ViewData["Title"] = "Add Club";
+    if (Model?.ClubID != 0)
+    {
+        ViewData["Title"] = "Update Club";
+    }
+    else
+    {
+        ViewData["Title"] = "Add Club";
+    }
 }
+<h2>@ViewData["Title"]</h2>
 
-<h2>Add Club</h2>
+<br />
 
 <form asp-action="SaveClub" method="post">
 
@@ -15,5 +23,5 @@
     <input type="hidden" asp-for="ClubID" />
     @await Html.PartialAsync("ClubForm")
     <button id="btnSave" type="submit" class="btn btn-dark">Save</button>
-    <a href="Index" class="btn btn-outline-dark">Cancel</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-dark">Cancel</a>
 </form>

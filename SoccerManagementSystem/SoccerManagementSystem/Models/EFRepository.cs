@@ -34,9 +34,14 @@ namespace SoccerManagementSystem.Models
 
         public Club Delete(int clubID)
         {
-            Club club = dbContext.Clubs.FirstOrDefault(c => c.ClubID == clubID);
+            Club club = dbContext.Clubs.Include(c => c.Players).FirstOrDefault(c => c.ClubID == clubID);
             if (club != null)
             {
+                foreach (var player in club.Players)
+                {
+                    player.hasTeam = false;
+                }
+                club.Players.RemoveAll(p => p.hasTeam = false);
                 dbContext.Clubs.Remove(club);
                 dbContext.SaveChanges();
             }
